@@ -1,7 +1,17 @@
+"""sersic.py -- functions to work with Sersic profiles
+
+Notes:
+    Most equations from Graham & Driver (2005PASA...22..118G).
+
+    Approximation for b from Appendix A in MacArthur et al.
+    (2003ApJ...582..689M).
+"""
+
 import numpy
 from scipy import special
 
 def sersic_b(n):
+    """Approx Sersic b param."""
     if numpy.isscalar(n):
         narr = numpy.array([n])
     else:
