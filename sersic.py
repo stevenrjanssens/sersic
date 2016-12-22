@@ -71,3 +71,21 @@ def mueff_from_mu0(mu_0, sersic_index):
     sersic_index: sersic index n
     """
     return mu_0 + 2.5*sersic_b(sersic_index)/numpy.log(10)
+
+def mag_from_meanmueff(meanmueff, R_e, q=1):
+    """
+    meanmueff: mean surface brightness within R_e
+    R_e:       R_e in arcsec
+    q:         axis ratio, q=1 for circularized R_e
+    """
+    return meanmueff - 2.5*numpy.log10(2*numpy.pi*(R_e**2)*q)
+
+def mag_from_mueff(mu_e, R_e, sersic_index, q=1):
+    """
+    mueff:        mean surface brightness within R_e
+    R_e:          R_e in arcsec
+    sersic_index: sersic index n
+    q:            axis ratio, q=1 for circularized R_e
+    """
+    meanmueff = meanmueff_from_mueff(mu_e, sersic_index)
+    return mag_from_meanmueff(meanmueff, R_e, q)
