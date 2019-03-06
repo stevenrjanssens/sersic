@@ -50,6 +50,15 @@ def meanmueff_from_mueff(mu_e, sersic_index):
     sersic_f = sersic_index * numpy.exp(b) / numpy.power(b, 2*sersic_index) * special.gamma(2*sersic_index)
     return mu_e - 2.5*numpy.log10(sersic_f)
 
+def mueff_from_meanmueff(meanmueff, sersic_index):
+    """
+    meanmueff: mean surface brightness within R_e
+    sersic_index: sersic index n
+    """
+    b = sersic_b(sersic_index)
+    sersic_f = sersic_index * numpy.exp(b) / numpy.power(b, 2*sersic_index) * special.gamma(2*sersic_index)
+    return meanmueff + 2.5*numpy.log10(sersic_f)
+
 def meanmueff_from_mu0(mu_0, sersic_index):
     """
     mu_0: central surface brightness
