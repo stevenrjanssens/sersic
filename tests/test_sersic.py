@@ -26,7 +26,3 @@ def test_mu0_from_mueff():
 def test_mueff_from_mu0():
     assert (sersic.mueff_from_mu0(mu0=0, n=1) - 1.822) < 1e-3
     assert (sersic.mueff_from_mu0(mu0=0, n=4) - 8.327) < 1e-3
-
-if __name__ == '__main__':
-    test_b()
-    test_meanmueff_from_mueff()
