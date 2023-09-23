@@ -20,13 +20,15 @@ def sersic_b(n):
     big_n = (narr > 0.36)
     small_n = (narr <= 0.36)
     
-    b = numpy.zeros(len(narr))
-    
+    b = numpy.zeros(narr.shape)
+
     # use expansion for n > 0.36
-    b[big_n] = 2*narr[big_n] - 1./3 + 4./405/narr[big_n] + 46./25515/narr[big_n]**2 + 131./1148175/narr[big_n]**3 - 2194697./30690717750/narr[big_n]**4
+    b1 = 2*narr - 1./3 + 4./405/narr + 46./25515/narr**2 + 131./1148175/narr**3 - 2194697./30690717750/narr**4
+    numpy.copyto(b, b1, where=big_n)
     
     # use polynomial approx for small n
-    b[small_n] = 0.01945 - 0.8902*narr[small_n] + 10.95*narr[small_n]**2 - 19.67*narr[small_n]**3 + 13.43*narr[small_n]**4
+    b2 = 0.01945 - 0.8902*narr + 10.95*narr**2 - 19.67*narr**3 + 13.43*narr**4
+    numpy.copyto(b, b2, where=small_n)
     
     if numpy.isscalar(n):
         return b[0]
